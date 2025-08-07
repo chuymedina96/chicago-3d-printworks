@@ -1,0 +1,45 @@
+.tech-container {
+  padding: 3rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', sans-serif;
+  line-height: 1.7;
+  color: #222;
+  background-color: #fff;
+}
+
+.tech-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.tech-container h2 {
+  font-size: 1.8rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  color: #00adb5;
+}
+
+.tech-container p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-container ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-container li {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+code {
+  background: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+}
