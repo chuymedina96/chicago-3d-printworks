@@ -1,0 +1,168 @@
+/* Page wrapper (scoped) */
+.about-page {
+  --about-pad: clamp(16px, 2.2vw, 28px);
+  --about-gap: clamp(12px, 1.6vw, 20px);
+}
+
+.about-page .card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: calc(var(--about-pad) + 2px) var(--about-pad);
+  box-shadow: var(--shadow);
+}
+
+.about-page h1,
+.about-page h2,
+.about-page h3 {
+  margin: 0 0 .35rem 0;
+}
+
+.about-page .lede {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Section spacing */
+.about-page section + section {
+  margin-top: clamp(16px, 2.4vw, 28px);
+}
+
+/* Team grid */
+.team-grid {
+  display: grid;
+  gap: var(--about-gap);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 820px) {
+  .team-grid {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+  }
+}
+
+.headshot {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--table-head-bg), transparent);
+}
+
+/* Meta rows */
+.kv {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: .95rem;
+  color: var(--muted);
+}
+.kv .pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--table-head-bg);
+}
+
+/* Bullets */
+.about-page ul {
+  margin: .4rem 0 0 1.05rem;
+}
+.about-page li + li {
+  margin-top: .25rem;
+}
+
+/* Link row */
+.link-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: .6rem;
+}
+.link-row a {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+/* LinkedIn special styling */
+.linkedin-link {
+  background: #0a66c2;
+  color: #fff !important;
+  border: none;
+}
+.linkedin-link:hover {
+  background: #084a90;
+}
+
+/* LinkedIn icon sizing */
+.linkedin-link .linkedin-icon {
+  font-size: 1.2em;
+  margin-right: 4px;
+}
+
+/* Extra team card spacing */
+.team-card {
+  padding: 24px;
+}
+
+.team-member {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.team-photo {
+  flex: 0 0 200px;
+  max-width: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.team-info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.tags {
+  margin: 6px 0 12px;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+}
+/* Fix inline <code> (e.g., `trimesh`) appearing as white pills on dark bg */
+.about-page code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 .15em;          /* a tiny breathing room, no pill */
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+               "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+/* If any list/paragraph-specific code styles exist globally, nuke them */
+.about-page p code,
+.about-page li code,
+.about-page h1 code,
+.about-page h2 code,
+.about-page h3 code {
+  background: transparent !important;
+  color: inherit !important;
+}
+

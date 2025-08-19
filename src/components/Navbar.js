@@ -8,14 +8,20 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
+  // mark active if current path starts with the item path
+  const isActive = (path) =>
+    location.pathname === path || location.pathname.startsWith(path + '/');
+
   const navItems = [
     { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
     { name: 'Instant Quote', path: '/quote' },
     { name: 'Technologies', path: '/technologies' },
     { name: 'Engineering Support', path: '/support' },
+    { name: 'Terms', path: '/terms' },
   ];
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen((o) => !o);
 
   return (
     <>
@@ -28,18 +34,23 @@ const Navbar = () => {
         <div className="navbar-container">
           <Link to="/" className="logo-text">Chicago 3D Printworks</Link>
 
-          <div className="menu-toggle" onClick={toggleMenu}>
+          <button
+            className="menu-toggle"
+            onClick={toggleMenu}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+          >
             <div className={`bar ${isOpen ? 'open' : ''}`}></div>
             <div className={`bar ${isOpen ? 'open' : ''}`}></div>
             <div className={`bar ${isOpen ? 'open' : ''}`}></div>
-          </div>
+          </button>
 
           <ul className="navbar-links desktop">
-            {navItems.map(item => (
+            {navItems.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={location.pathname === item.path ? 'active' : ''}
+                  className={isActive(item.path) ? 'active' : ''}
                 >
                   {item.name}
                 </Link>
@@ -60,14 +71,14 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="mobile-nav-content">
-              <div className="close-btn" onClick={toggleMenu}>✕</div>
+              <button className="close-btn" onClick={toggleMenu} aria-label="Close menu">✕</button>
               <ul>
-                {navItems.map(item => (
+                {navItems.map((item) => (
                   <li key={item.path}>
                     <Link
                       to={item.path}
                       onClick={() => setIsOpen(false)}
-                      className={location.pathname === item.path ? 'active' : ''}
+                      className={isActive(item.path) ? 'active' : ''}
                     >
                       {item.name}
                     </Link>

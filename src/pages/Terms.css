@@ -1,0 +1,73 @@
+/* src/pages/Terms.css */
+
+/* Namespace everything under .terms-page so styles stay local */
+.terms-page {
+  line-height: 1.6;
+}
+
+.terms-page h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+}
+
+.terms-page .muted {
+  color: var(--muted, #777);
+  font-size: 0.9rem;
+}
+
+.terms-page nav {
+  margin-top: 1rem;
+}
+
+.terms-page nav ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.terms-page nav a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: var(--panel, #1b1b1b);
+  border: 1px solid var(--border, #333);
+  color: var(--text, #eee);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.terms-page nav a:hover {
+  background: var(--brand-50, #2d2dff20);
+  border-color: var(--ring, #666);
+}
+
+.terms-page section {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border, #333);
+  border-radius: 10px;
+  background: var(--panel, #111);
+}
+
+.terms-page h3 {
+  margin-top: 0;
+}
+
+.terms-page ul.checklist {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 0;
+}
+
+.terms-page ul.checklist li {
+  margin: 0.35rem 0;
+}
+
+.terms-page a {
+  color: var(--brand, #3b82f6);
+}
+
+.terms-page .actions {
+  margin-top: 1.5rem;
+}
