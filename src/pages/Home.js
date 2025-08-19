@@ -1,7 +1,7 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
 
-const rotatingWords = ["Engineers", "Brands", "Creators"];
+const rotatingWords = ['Engineers', 'Brands', 'Creators'];
 
 function Home() {
   const [index, setIndex] = useState(0);
@@ -9,10 +9,14 @@ function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % rotatingWords.length);
-    }, 2500); // rotates every 2.5 seconds
-
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
+
+  const scrollToNext = () => {
+    const el = document.getElementById('capabilities');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <div className="home">
@@ -25,33 +29,50 @@ function Home() {
         <div className="hero-content">
           <h1>Chicago 3D Printworks</h1>
           <p>
-            Precision 3D Printing for{" "}
+            Precision 3D Printing for{' '}
             <span className="rotating-word">{rotatingWords[index]}</span>
           </p>
           <a href="/quote" className="cta-button">Get an Instant Quote</a>
+
+          {/* Scroll hint */}
+          <div className="scroll-down">
+            <span>Scroll down to learn more</span>
+            <button
+              type="button"
+              className="arrow-btn"
+              onClick={scrollToNext}
+              aria-label="Scroll to next section"
+            >
+              ↓
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Technologies / Capabilities */}
-      <section className="section light-section">
+      <section className="section light-section" id="capabilities">
         <h2>Technologies & Capabilities</h2>
         <div className="features-grid">
           <div className="feature-card">
             <h3>FDM & Multi-Color</h3>
             <p>
-              High-speed desktop FDM printing with support for PLA, PLA+, PETG, and carbon fiber-reinforced nylon. All machines run upgraded hardened steel nozzles for abrasive material compatibility.
+              High-speed desktop FDM printing with support for PLA, PLA+, PETG, and carbon
+              fiber–reinforced nylon. All machines run upgraded hardened steel nozzles for
+              abrasive material compatibility.
             </p>
           </div>
           <div className="feature-card">
             <h3>Functional Prototyping</h3>
             <p>
-              We focus on parts that function — from mechanical brackets to flexible enclosures and custom tools. Every part is made in-house with precision and intent.
+              We focus on parts that function — from mechanical brackets to flexible enclosures and
+              custom tools. Every part is made in-house with precision and intent.
             </p>
           </div>
           <div className="feature-card">
             <h3>Engineering-Grade Ambitions</h3>
             <p>
-              We’re currently exploring support for PEEK and high-temp materials, investing in both the hardware and workflow necessary to produce true engineering-grade components.
+              We’re currently exploring support for PEEK and high-temp materials, investing in
+              both the hardware and workflow necessary to produce true engineering-grade components.
             </p>
           </div>
         </div>
@@ -64,23 +85,30 @@ function Home() {
           <div className="feature-card">
             <h3>Custom Quoting Engine</h3>
             <p>
-              We're actively developing a Python-based STL parsing engine that analyzes mesh geometry,
-              volume, surface area, and bounding boxes to generate accurate, material-aware quotes.
+              We're actively developing a Python-based STL parsing engine that analyzes mesh
+              geometry, volume, surface area, and bounding boxes to generate accurate,
+              material-aware quotes.
             </p>
           </div>
           <div className="feature-card">
             <h3>Built from Scratch</h3>
             <p>
-              Our team is writing the quoting algorithms ourselves — allowing us to fully control how geometry,
-              materials, and print settings map to production time and cost.
+              Our team is writing the quoting algorithms ourselves — allowing us to fully control
+              how geometry, materials, and print settings map to production time and cost.
             </p>
           </div>
           <div className="feature-card">
             <h3>Future-Ready Intelligence</h3>
             <p>
-              As our tool evolves, we aim to offer real-time quotes tailored to complex prints and exotic materials like carbon fiber nylon, TPU, and PEEK.
+              As our tool evolves, we aim to offer real-time quotes tailored to complex prints and
+              exotic materials like carbon fiber nylon, TPU, and PEEK.
             </p>
           </div>
+        </div>
+
+        {/* CTA to try it */}
+        <div style={{ marginTop: '2rem' }}>
+          <a href="/quote" className="cta-button">Try the Instant Quote Tool</a>
         </div>
       </section>
 
@@ -125,7 +153,9 @@ function Home() {
       {/* Footer */}
       <footer className="site-footer">
         <div>© 2025 Chicago 3D Printworks</div>
-        <div><a href="/support">Support</a> • <a href="/quote">Quote</a> • <a href="/terms">Terms</a></div>
+        <div>
+          <a href="/support">Support</a> • <a href="/quote">Quote</a> • <a href="/terms">Terms</a>
+        </div>
       </footer>
     </div>
   );
