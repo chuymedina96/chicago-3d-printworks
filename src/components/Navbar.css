@@ -7,8 +7,8 @@
 
 .navbar {
   width: 100%;
-  background: #0f172a;
-  color: white;
+  background: #0f172a; /* dark slate */
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -25,14 +25,12 @@
 .logo-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #00adb5;
+  color: #00adb5; /* teal */
   text-decoration: none;
   white-space: nowrap;
 }
 
-.logo-text:hover {
-  color: #8deaff;
-}
+.logo-text:hover { color: #8deaff; }
 
 /* Desktop nav */
 .navbar-links.desktop {
@@ -42,22 +40,17 @@
 }
 
 .navbar-links.desktop a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-size: 1rem;
   position: relative;
 }
 
-.navbar-links.desktop a:hover {
-  color: #00adb5;
-}
-
-.navbar-links .active {
-  color: #00adb5;
-}
+.navbar-links.desktop a:hover { color: #00adb5; }
+.navbar-links .active { color: #00adb5; }
 
 .navbar-links.desktop a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0%;
   height: 2px;
@@ -67,49 +60,60 @@
   transition: width 0.3s ease;
 }
 
-.navbar-links.desktop a:hover::after {
-  width: 100%;
-}
+.navbar-links.desktop a:hover::after { width: 100%; }
 
-/* Mobile toggle */
+/* Mobile toggle (hamburger) */
 .menu-toggle {
   display: none;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+
+  /* kill default grey button styles */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 8px;
+  border-radius: 10px;
+
+  /* remove iOS tap highlight/grey */
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+
+.menu-toggle:hover {
+  background: rgba(255,255,255,0.06); /* subtle hover tint */
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid #00adb5; /* teal focus ring */
+  outline-offset: 2px;
 }
 
 .bar {
   width: 25px;
   height: 3px;
-  background-color: white;
-  transition: 0.3s;
+  background-color: #ffffff; /* solid white bars */
+  transition: transform 0.3s ease, opacity 0.2s ease;
+  border-radius: 2px;
 }
 
-.bar.open:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.bar.open:nth-child(2) {
-  opacity: 0;
-}
-
-.bar.open:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+.bar.open:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.bar.open:nth-child(2) { opacity: 0; }
+.bar.open:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* Fullscreen mobile dropdown */
 .mobile-nav-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   height: 100vh;
   width: 100vw;
-  background: #0f172a;
+  background: rgba(15, 23, 42, 0.98); /* same tone, slight translucency */
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: saturate(120%) blur(2px);
 }
 
 .mobile-nav-content {
@@ -121,11 +125,20 @@
 
 .mobile-nav-content .close-btn {
   font-size: 2rem;
-  color: white;
+  color: #ffffff;
   position: absolute;
   top: 1.25rem;
   right: 1.75rem;
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+
+.mobile-nav-content .close-btn:focus-visible {
+  outline: 2px solid #00adb5;
+  outline-offset: 2px;
 }
 
 .mobile-nav-content ul {
@@ -134,26 +147,17 @@
   width: 100%;
 }
 
-.mobile-nav-content li {
-  padding: 1rem 0;
-}
+.mobile-nav-content li { padding: 1rem 0; }
 
 .mobile-nav-content a {
   font-size: 1.5rem;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
 }
 
-.mobile-nav-content a:hover {
-  color: #00adb5;
-}
+.mobile-nav-content a:hover { color: #00adb5; }
 
 @media (max-width: 768px) {
-  .navbar-links.desktop {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
+  .navbar-links.desktop { display: none; }
+  .menu-toggle { display: flex; }
 }

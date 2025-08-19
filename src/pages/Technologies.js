@@ -1,9 +1,8 @@
-// src/pages/Technologies.js
 import './Technologies.css';
 
 function Technologies() {
   return (
-    <div className="tech-container">
+    <main className="tech-container" role="main" aria-label="Technologies">
       <h1>Our 3D Printing Stack</h1>
       <p>
         At Chicago 3D Printworks, we’re currently running a fleet of high-speed FDM printers,
@@ -37,7 +36,7 @@ function Technologies() {
         support for advanced materials like TPU, ASA, and PEEK. Resin/SLA capabilities and CNC post-processing
         are also on our roadmap as demand increases.
       </p>
-    </div>
+    </main>
   );
 }
 

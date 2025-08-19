@@ -8,7 +8,6 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  // mark active if current path starts with the item path
   const isActive = (path) =>
     location.pathname === path || location.pathname.startsWith(path + '/');
 
@@ -39,6 +38,8 @@ const Navbar = () => {
             onClick={toggleMenu}
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+            type="button"
           >
             <div className={`bar ${isOpen ? 'open' : ''}`}></div>
             <div className={`bar ${isOpen ? 'open' : ''}`}></div>
@@ -48,10 +49,7 @@ const Navbar = () => {
           <ul className="navbar-links desktop">
             {navItems.map((item) => (
               <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={isActive(item.path) ? 'active' : ''}
-                >
+                <Link to={item.path} className={isActive(item.path) ? 'active' : ''}>
                   {item.name}
                 </Link>
               </li>
@@ -60,10 +58,10 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Fullscreen mobile nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-nav"
             className="mobile-nav-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -71,7 +69,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="mobile-nav-content">
-              <button className="close-btn" onClick={toggleMenu} aria-label="Close menu">✕</button>
+              <button className="close-btn" onClick={toggleMenu} aria-label="Close menu" type="button">✕</button>
               <ul>
                 {navItems.map((item) => (
                   <li key={item.path}>

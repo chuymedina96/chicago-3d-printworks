@@ -1,18 +1,13 @@
-// src/pages/About.jsx
 import React from "react";
 import "./About.css";
 
 export default function About() {
   return (
-    <main
-      className="quote-container about-page"
-      role="main"
-      aria-label="About Chicago 3D Printworks"
-    >
+    <main className="about-page" role="main" aria-label="About Chicago 3D Printworks">
       {/* Intro */}
-      <section className="card" aria-labelledby="about-title">
+      <section className="about-card" aria-labelledby="about-title">
         <h1 id="about-title">About Chicago 3D Printworks</h1>
-        <p className="lede">
+        <p className="about-lede">
           We’re an engineering-driven shop focused on fast, repeatable pipelines for prototype and
           small–medium batch production. Our quoting engine, print recipes, and scheduling tools are
           built in-house to keep quality high and pricing transparent.
@@ -20,7 +15,7 @@ export default function About() {
       </section>
 
       {/* Story */}
-      <section className="card" aria-labelledby="story-title">
+      <section className="about-card" aria-labelledby="story-title">
         <h2 id="story-title">Our Story</h2>
         <p>
           We started with a simple idea: apply <strong>software + DevOps thinking</strong> to
@@ -33,17 +28,16 @@ export default function About() {
           Our first product line was delightfully scrappy—<strong>CatCap</strong>, a customizable
           cap for cats designed for birthdays, photo shoots, and playful personalization. It taught
           us variant management, fast iteration, and small-batch QC. Today, we help hardware teams,
-          labs, and creators move from one-off prototypes to{" "}
-          <em>repeatable short-run production</em>.
+          labs, and creators move from one-off prototypes to <em>repeatable short-run production</em>.
         </p>
       </section>
 
       {/* Team */}
-      <section className="card" aria-labelledby="team-title">
+      <section className="about-card" aria-labelledby="team-title">
         <h2 id="team-title">Team</h2>
 
         {/* Jesus (Chuy) Medina */}
-        <div className="card" style={{ padding: 16, marginTop: 10 }}>
+        <div className="about-card soft" >
           <div className="team-grid">
             <img
               className="headshot"
@@ -52,19 +46,18 @@ export default function About() {
               loading="lazy"
             />
             <div>
-              <h3 style={{ marginBottom: 2 }}>Jesus Medina</h3>
+              <h3 className="team-name">Jesus Medina</h3>
               <div className="kv" aria-label="Role">
                 <span className="pill">Founder</span>
                 <span className="pill">Software &amp; DevOps</span>
               </div>
 
-              <p style={{ marginTop: 10 }}>
+              <p>
                 I’m a software engineer and DevOps practitioner turned maker. Over the years I’ve
                 built and operated systems for startups, Fortune 500 companies, and even U.S.
                 federal agencies—where reliability and scale were non-negotiable. From containerized
                 microservices to Kubernetes infrastructure for the Department of Education, I’ve
-                learned how to deliver software that’s{" "}
-                <strong>repeatable, observable, and fast</strong>.
+                learned how to deliver software that’s <strong>repeatable, observable, and fast</strong>.
               </p>
               <p>
                 Now I’m applying that mindset to 3D printing—treating printers like a fleet, jobs
@@ -88,7 +81,6 @@ export default function About() {
                 <a href="/terms" className="button-secondary">Terms</a>
                 <a href="/support" className="button-secondary">Contact</a>
 
-                {/* LinkedIn CTA with logo */}
                 <a
                   href="https://www.linkedin.com/in/jmedina-creative-software-engineer/"
                   target="_blank"
@@ -118,9 +110,9 @@ export default function About() {
         </div>
 
         {/* Future teammates */}
-        <div className="card" style={{ padding: 16, marginTop: 12 }}>
-          <h3 style={{ marginBottom: 6 }}>We’re growing</h3>
-          <p className="lede">
+        <div className="about-card soft">
+          <h3>We’re growing</h3>
+          <p className="about-lede">
             This page is a work in progress—more teammates, partners, and shop photos coming soon.
           </p>
         </div>

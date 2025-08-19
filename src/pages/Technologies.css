@@ -1,45 +1,106 @@
+/* src/pages/Technologies.css */
+
+/* ---- Container ---- */
 .tech-container {
-  padding: 3rem 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
-  font-family: 'Helvetica Neue', sans-serif;
-  line-height: 1.7;
-  color: #222;
-  background-color: #fff;
+  /* spacing scales */
+  --pad-x: clamp(16px, 4vw, 40px);
+  --pad-y: clamp(24px, 5vw, 56px);
+  --radius: 18px;
+
+  --fg: #e6e9f2;
+  --muted: #bac3d6;
+  --panel: #0b1324;
+  --border: #1e2745;
+  --brand: #06b6d4;
+
+  max-width: 1000px;
+  margin: clamp(16px, 3vw, 28px) auto;
+  padding: var(--pad-y) var(--pad-x);
+  color: var(--fg);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent), var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 24px rgba(0,0,0,.25);
+  line-height: 1.75;
+  overflow: hidden; /* keeps rounded corners clean with shadows */
 }
 
+/* ---- Typography ---- */
 .tech-container h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #0f172a;
-}
-
-.tech-container h2 {
-  font-size: 1.8rem;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  color: #00adb5;
+  font-size: clamp(2rem, 4.2vw, 2.75rem);
+  line-height: 1.15;
+  margin: 0 0 0.85rem 0;
+  letter-spacing: 0.2px;
+  color: #fff;
 }
 
 .tech-container p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.1rem 0;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  color: var(--fg);
 }
 
+.tech-container h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.25;
+  margin: clamp(28px, 6vw, 40px) 0 0.65rem 0; /* more air before section */
+  color: var(--brand);
+  letter-spacing: 0.2px;
+}
+
+/* Subdued paragraph following an h1 gets a touch more room */
+.tech-container h1 + p { margin-bottom: 1.25rem; }
+
+/* ---- Lists ---- */
 .tech-container ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
+  list-style: none;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
 }
 
 .tech-container li {
-  margin-bottom: 0.5rem;
-  font-size: 1.05rem;
+  position: relative;
+  padding-left: 1.2rem;
+  margin: 0.45rem 0;
+  font-size: clamp(1rem, 1.15vw, 1.0625rem);
 }
 
+.tech-container li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 1;
+  color: var(--brand);
+  font-weight: 800;
+  transform: translateY(2px);
+}
+
+/* ---- Inline code ---- */
 code {
-  background: #f0f0f0;
-  padding: 2px 5px;
-  border-radius: 4px;
-  font-family: monospace;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  color: #7cc7ff;
+  white-space: nowrap;
+}
+
+/* ---- Links (if any appear in copy) ---- */
+.tech-container a {
+  color: #7cc7ff;
+  text-decoration: none;
+}
+.tech-container a:hover { text-decoration: underline; }
+
+/* ---- Responsive polish ---- */
+@media (min-width: 900px) {
+  .tech-container { line-height: 1.8; }
+}
+
+/* Reduce motion users */
+@media (prefers-reduced-motion: reduce) {
+  .tech-container { scroll-behavior: auto; }
 }
