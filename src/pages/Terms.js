@@ -182,7 +182,7 @@ export default function Terms() {
           <h3>13. Contact</h3>
           <p>
             Questions? Email us at{" "}
-            <a href="mailto:hello@chicago3dprintworks.com">hello@chicago3dprintworks.com</a>.
+            <a href="mailto:hello@chicago3dprintworks.com">chicago3dprintworks@gmail.com</a>.
           </p>
         </section>
 

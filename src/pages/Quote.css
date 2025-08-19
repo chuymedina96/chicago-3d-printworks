@@ -1,0 +1,103 @@
+/* src/pages/Quote.css */
+
+/* Theme tokens (kept inline so page is portable) */
+.quote-page {
+  --fg: #e6e9f2;
+  --muted: #a7b0c2;
+  --panel: #0b1324;
+  --border: #1e2745;
+
+  display: flex;
+  justify-content: center;
+  /* generous vertical, flexible horizontal */
+  padding: clamp(16px, 4vw, 32px) clamp(12px, 4vw, 40px);
+  color: var(--fg);
+  background: transparent;
+}
+
+/* Wider card; matches Support max width */
+.quote-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(20px, 3.6vw, 48px);
+  width: 100%;
+  max-width: 1120px;                  /* ⬅️ increased */
+  box-shadow: 0 6px 24px rgba(0,0,0,.25);
+}
+
+/* Headings + lede */
+.quote-card h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin: 0 0 0.8rem 0;
+  color: #fff;
+}
+
+.quote-lede {
+  margin: 0 0 1.25rem 0;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* Give the embedded QuoteForm some room */
+.quote-card form,
+.quote-card .quote-form {
+  margin-top: 1.25rem;
+}
+
+/* Inputs inside QuoteForm (safe, non-breaking selectors) */
+.quote-card input,
+.quote-card select,
+.quote-card textarea {
+  background: #0d172a;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--fg);
+  padding: 12px 14px;
+  width: 100%;
+}
+
+.quote-card input:focus,
+.quote-card select:focus,
+.quote-card textarea:focus {
+  outline: 2px solid #06b6d4;
+  outline-offset: 2px;
+}
+
+/* Buttons inside the form */
+.quote-card button {
+  background: #06b6d4;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+
+.quote-card button:hover {
+  background: #0891b2;
+  transform: translateY(-1px);
+}
+
+/* --- Responsive polish --- */
+
+/* On very small screens, let the card go nearly full-bleed */
+@media (max-width: 520px) {
+  .quote-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .quote-card {
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.25);
+  }
+}
+
+/* On large screens, give the form a little more vertical space */
+@media (min-width: 1200px) {
+  .quote-card { padding: 56px; }
+}
