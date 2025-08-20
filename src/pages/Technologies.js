@@ -21,7 +21,7 @@ function Technologies() {
       <h2>File Support & Geometry Analysis</h2>
       <p>
         We currently accept STL and OBJ file formats. Our backend quote system is powered by a custom
-        Python algorithm that parses 3D mesh geometry using <code>trimesh</code> and other open-source libraries.
+        Python algorithm that parses 3D mesh geometry.
         It analyzes surface area, bounding box dimensions, and part volume to help generate accurate time and material estimates.
       </p>
 

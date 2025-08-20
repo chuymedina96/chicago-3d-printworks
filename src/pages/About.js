@@ -20,7 +20,7 @@ export default function About() {
         <p>
           We started with a simple idea: apply <strong>software + DevOps thinking</strong> to
           additive manufacturing. We wrote a Python quoting engine that analyzes mesh geometry
-          (via <code>trimesh</code>) to compute volume, surface area, triangle count, and a
+           to compute volume, surface area, triangle count, and a
           print-time model. Those signals tie into material profiles and machine throughput to
           generate instant quotes—then the same parameters are used to orchestrate jobs on the floor.
         </p>
@@ -70,7 +70,7 @@ export default function About() {
               <ul>
                 <li>Tooling: Python, Node, Docker, CI/CD, observability.</li>
                 <li>
-                  Quoting engine: mesh parsing with <code>trimesh</code>, material profiles,
+                  Quoting engine: mesh parsing with in-house coded analysis API, material profiles,
                   time/throughput models.
                 </li>
                 <li>Ops: print farm orchestration, parameter versioning, quality traces.</li>
