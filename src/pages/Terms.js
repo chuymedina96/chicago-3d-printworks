@@ -80,8 +80,8 @@ export default function Terms() {
           <h3>4. Technology, Quoting Engine & API</h3>
           <ul className="checklist">
             <li>
-              Our instant quote tool runs a <b>custom Python quoting engine</b> that parses mesh geometry using
-              libraries such as <b>trimesh</b> together with our own analyzers. It computes volume, surface area,
+              Our instant quote tool runs a <b>custom Python quoting engine</b> that parses mesh geometry using open-source
+              libraries together with our own analyzers. It computes volume, surface area,
               triangle count, and bounding boxes, then applies <b>material profiles</b> (density, recommended layer
               heights, process multipliers) and <b>machine throughput models</b> to estimate print time and material mass.
             </li>
