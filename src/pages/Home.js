@@ -23,7 +23,7 @@ function Home() {
       {/* Hero Section */}
       <section className="hero-section">
         <video autoPlay loop muted playsInline className="bg-video">
-          <source src="/assets/13211149_3840_2160_25fps.mp4" type="video/mp4" />
+          <source src="/assets/72c3f85c-86e4-4aa2-9741-da157a6df5a2.mp4" type="video/mp4" />
         </video>
 
         <div className="hero-content">
