@@ -15,3 +15,4 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+// serve -s build
