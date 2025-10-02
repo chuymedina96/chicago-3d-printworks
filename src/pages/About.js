@@ -20,7 +20,7 @@ export default function About() {
         <p>
           We started with a simple idea: apply <strong>software + DevOps thinking</strong> to
           additive manufacturing. We wrote a Python quoting engine that analyzes mesh geometry
-           to compute volume, surface area, triangle count, and a
+          to compute volume, surface area, triangle count, and a
           print-time model. Those signals tie into material profiles and machine throughput to
           generate instant quotes—then the same parameters are used to orchestrate jobs on the floor.
         </p>
@@ -36,9 +36,9 @@ export default function About() {
       <section className="about-card" aria-labelledby="team-title">
         <h2 id="team-title">Team</h2>
 
-        {/* Jesus (Chuy) Medina */}
-        <div className="about-card soft" >
-          <div className="team-grid">
+        <div className="team-grid-2">
+          {/* Jesus (Chuy) Medina */}
+          <div className="team-member">
             <img
               className="headshot"
               src="/images/team/chuy.jpeg"
@@ -47,69 +47,72 @@ export default function About() {
             />
             <div>
               <h3 className="team-name">Jesus Medina</h3>
-              <div className="kv" aria-label="Role">
+              <div className="kv">
                 <span className="pill">Founder</span>
                 <span className="pill">Software &amp; DevOps</span>
               </div>
-
               <p>
-                I’m a software engineer and DevOps practitioner turned maker. Over the years I’ve
-                built and operated systems for startups, Fortune 500 companies, and even U.S.
-                federal agencies—where reliability and scale were non-negotiable. From containerized
-                microservices to Kubernetes infrastructure for the Department of Education, I’ve
-                learned how to deliver software that’s <strong>repeatable, observable, and fast</strong>.
+                Jesus is a software engineer, DevOps practitioner, and maker. Before founding Chicago 3D Printworks, he built large-scale systems for startups, Fortune 500 companies, and U.S. federal agencies—including Kubernetes infrastructure for the Department of Education, where reliability and scale were critical.
               </p>
               <p>
-                Now I’m applying that mindset to 3D printing—treating printers like a fleet, jobs
-                like deployments, and build parameters like versioned infrastructure. My focus is on
-                pipeline-driven quoting, consistent material/process recipes, and lights-out
-                scheduling for <strong>small-to-medium batch production</strong>. If it can be
-                scripted, monitored, or automated, it gets done.
+                At Chicago 3D Printworks, he coded our quoting engine from scratch—analyzing STL files to accurately predict print time, material usage, and costs with engineering-grade precision. By combining DevOps pipelines with 3D printing, he treats production like infrastructure: orchestrated, repeatable, and fast.
               </p>
-
+              <p>
+                His vision is to use this approach not only to support labs and engineering teams, but also to build a community-centered production hub on the South Side of Chicago—bringing accessible manufacturing to the neighborhoods that need it most.
+              </p>
               <ul>
                 <li>Tooling: Python, Node, Docker, CI/CD, observability.</li>
-                <li>
-                  Quoting engine: mesh parsing with in-house coded analysis API, material profiles,
-                  time/throughput models.
-                </li>
+                <li>Quoting engine: STL parsing, material profiling, print-time/cost prediction.</li>
                 <li>Ops: print farm orchestration, parameter versioning, quality traces.</li>
               </ul>
-
               <div className="link-row">
                 <a href="/quote" className="button-secondary">Try Instant Quote</a>
                 <a href="/terms" className="button-secondary">Terms</a>
                 <a href="/support" className="button-secondary">Contact</a>
-
                 <a
                   href="https://www.linkedin.com/in/jmedina-creative-software-engineer/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="button-secondary linkedin-link"
-                  aria-label="Follow Jesus Medina on LinkedIn"
                 >
-                  <svg
-                    className="linkedin-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.447-2.136 2.943v5.663H9.351V9h3.414v1.561h.047c.476-.9 1.637-1.85 3.368-1.85 3.6 0 4.265 2.37 4.265 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zM6.998 20.452H3.674V9h3.324v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0z"
-                    />
-                  </svg>
                   LinkedIn
                 </a>
               </div>
             </div>
           </div>
+
+          {/* Xitlali Avila */}
+          <div className="team-member">
+            <img
+              className="headshot"
+              src="/images/team/IMG_5105.jpeg"
+              alt="Xitlali Avila"
+              loading="lazy"
+            />
+            <div>
+              <h3 className="team-name">Xitlali Avila</h3>
+              <div className="kv">
+                <span className="pill">Co-Founder</span>
+                <span className="pill">Operations &amp; Community</span>
+              </div>
+              <p>
+                Xitlali Avila is the co-founder of Chicago 3D Printworks, where she leads operations and helps shape the company’s creative direction. With a background in labor organizing and education, she brings a unique perspective to managing workflows, coordinating partnerships, and ensuring projects run smoothly from start to finish.
+              </p>
+              <p>
+                She combines her organizing experience with an entrepreneurial mindset, making her a key driver in building efficient processes while keeping the company grounded in culture and community. Her vision is to develop products that not only deliver quality and innovation but also honor Chicago’s neighborhoods and the stories they carry.
+              </p>
+              <ul>
+                <li>Operations: scheduling, QC, vendor coordination.</li>
+                <li>Client communications & fulfillment.</li>
+                <li>Community partnerships & outreach.</li>
+              </ul>
+              <div className="link-row">
+                <a href="/support" className="button-secondary">Contact</a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Future teammates */}
         <div className="about-card soft">
           <h3>We’re growing</h3>
           <p className="about-lede">

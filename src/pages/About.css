@@ -62,32 +62,51 @@
 .about-lede {
   color: var(--muted);
   line-height: 1.65;
+  max-width: 70ch;
 }
 
 /* ---- Team grid ---- */
-.team-grid {
+.team-grid-2 {
   display: grid;
-  gap: clamp(12px, 2vw, 20px);
   grid-template-columns: 1fr;
+  gap: var(--gap);
+  margin-top: 1rem;
 }
 
 @media (min-width: 820px) {
-  .team-grid {
-    grid-template-columns: 280px 1fr;
-    align-items: start;
+  .team-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.team-name { margin-bottom: 4px; }
+.team-member {
+  background: var(--panel-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(20px, 2.5vw, 32px);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  line-height: 1.7;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  border-color: #3a57e8; /* subtle highlight */
+}
 
 /* headshot */
-.headshot {
+.team-member img.headshot {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  max-width: 240px;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+  margin-bottom: 0.75rem;
 }
 
 /* meta pills */
@@ -108,15 +127,18 @@
 }
 
 /* bullets */
-.about-page ul { margin: .5rem 0 0 1.1rem; }
-.about-page li + li { margin-top: .28rem; }
+.about-page ul { 
+  margin: .75rem 0 0 1.1rem; 
+  padding-left: 0.25rem;
+}
+.about-page li + li { margin-top: .35rem; }
 
 /* link row */
 .link-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: .7rem;
+  margin-top: .9rem;
 }
 
 .link-row a {
@@ -143,7 +165,7 @@
 .linkedin-link:hover { background: #084a90; }
 .linkedin-link .linkedin-icon { font-size: 1.2em; }
 
-/* inline code should not look like pills here */
+/* inline code override */
 .about-page code {
   background: transparent !important;
   color: inherit !important;
@@ -154,8 +176,11 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.95em;
 }
-.about-page p code,
-.about-page li code,
-.about-page h1 code,
-.about-page h2 code,
-.about-page h3 code { background: transparent !important; color: inherit !important; }
+/* ---- Paragraph spacing inside team bios ---- */
+.team-member p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.75;       /* more relaxed than the default 1.7 */
+  max-width: 70ch;         /* keeps text from stretching too wide */
+}
+
