@@ -152,7 +152,7 @@ function Home() {
 
       {/* Footer */}
       <footer className="site-footer">
-        <div>© 2025 Chicago 3D Printworks</div>
+        <div>© 2026 Chicago 3D Printworks</div>
         <div>
           <a href="/support">Support</a> • <a href="/quote">Quote</a> • <a href="/terms">Terms</a>
         </div>

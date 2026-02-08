@@ -80,37 +80,6 @@ export default function About() {
               </div>
             </div>
           </div>
-
-          {/* Xitlali Avila */}
-          <div className="team-member">
-            <img
-              className="headshot"
-              src="/images/team/IMG_5105.jpeg"
-              alt="Xitlali Avila"
-              loading="lazy"
-            />
-            <div>
-              <h3 className="team-name">Xitlali Avila</h3>
-              <div className="kv">
-                <span className="pill">Co-Founder</span>
-                <span className="pill">Operations &amp; Community</span>
-              </div>
-              <p>
-                Xitlali Avila is the co-founder of Chicago 3D Printworks, where she leads operations and helps shape the company’s creative direction. With a background in labor organizing and education, she brings a unique perspective to managing workflows, coordinating partnerships, and ensuring projects run smoothly from start to finish.
-              </p>
-              <p>
-                She combines her organizing experience with an entrepreneurial mindset, making her a key driver in building efficient processes while keeping the company grounded in culture and community. Her vision is to develop products that not only deliver quality and innovation but also honor Chicago’s neighborhoods and the stories they carry.
-              </p>
-              <ul>
-                <li>Operations: scheduling, QC, vendor coordination.</li>
-                <li>Client communications & fulfillment.</li>
-                <li>Community partnerships & outreach.</li>
-              </ul>
-              <div className="link-row">
-                <a href="/support" className="button-secondary">Contact</a>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="about-card soft">
