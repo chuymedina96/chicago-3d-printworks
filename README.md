@@ -1,70 +1,169 @@
-# Getting Started with Create React App
+# Chicago 3D Print Works — Quote Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React application for chicago3dprintworks.com. Lets customers upload a 3D mesh file and get an instant price quote — including material selection, live price recalculation, a multi-part workspace, and PDF export.
 
-## Available Scripts
+Deployed separately to Heroku. Backend lives in `../quote_backend`.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Layer | Technology |
+|---|---|
+| UI Framework | React 19 |
+| Routing | React Router 7 |
+| HTTP | Axios |
+| File Upload | react-dropzone |
+| Animations | Framer Motion |
+| PDF Export | jsPDF + html2canvas |
+| Production Server | Express (server.js) |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Local Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cd quote-frontend
+npm install
+REACT_APP_API_BASE=http://localhost:8000 npm start
+```
 
-### `npm run build`
+App runs at `http://localhost:3000`. The Django backend must be running at `localhost:8000`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Docker
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# From repo root
+docker compose up frontend
 
-### `npm run eject`
+# Or build directly, passing the backend URL at build time
+docker build \
+  --build-arg REACT_APP_API_BASE=https://your-backend.herokuapp.com \
+  -t c3dpw-frontend \
+  ./quote-frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+docker run -p 3000:3000 c3dpw-frontend
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> **Note:** `REACT_APP_API_BASE` is baked into the React bundle at build time. You must pass it as a build argument, not a runtime environment variable.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Environment Variables
 
-## Learn More
+| Variable | Default | Description |
+|---|---|---|
+| `REACT_APP_API_BASE` | `http://localhost:8000` | Backend base URL (build-time) |
+| `REACT_APP_DATA_UPLOAD_MAX_MB` | `200` | Max upload size shown in UI (build-time) |
+| `PORT` | `3000` | Express server port (runtime) |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Routes
 
-### Code Splitting
+| Path | Page | Description |
+|---|---|---|
+| `/` | Home | Landing page with hero video |
+| `/quote` | Quote | Instant quote tool (main feature) |
+| `/technologies` | Technologies | Materials & printer info |
+| `/support` | Support | Contact & FAQ |
+| `/terms` | Terms | Terms of Service |
+| `/about` | About | Team & company info |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Key Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `src/components/QuoteForm.js`
+The primary user-facing feature. Handles the full quote flow from upload to cart.
 
-### Making a Progressive Web App
+**Capabilities:**
+- Drag-and-drop or click-to-upload for STL / OBJ files (react-dropzone)
+- Material selector with an info modal showing per-material properties:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  | Material | Tagline | Typical Use |
+  |---|---|---|
+  | PLA | Crisp, affordable, low warp | Prototypes, visual models |
+  | PLA+ | Stronger PLA | Functional parts |
+  | PETG | Chemical resistance + flexibility | Enclosures, brackets |
+  | Nylon | High strength, fatigue-resistant | Mechanical assemblies |
+  | CFNylon | Stiffest, lightest | Structural / load-bearing |
 
-### Advanced Configuration
+- Layer height and infill controls
+- Submits file to `POST /api/quote` on the backend
+- On success, hands the API response to `EstimateResult` for display
+- Client-side price recalculation mirrors backend math — instant material switching without a new upload
+- Captures a PNG thumbnail via html2canvas for the workspace cart
+- Adds completed quotes to the workspace (localStorage key: `c3dpw_workspaces_v1`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+### `src/components/EstimateResult.js`
+Displays the full breakdown for a single quote and handles live recalculation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Shows:**
+- Mesh geometry — volume (cm³), surface area (cm²), bounding box (mm), triangle count
+- Material dropdown — switching material instantly recalculates via `React.useMemo`
+- Estimated weight (g), print time (hr), and **total price (USD)**
 
-### `npm run build` fails to minify
+**Recalculation logic** (mirrors `quote_engine.py`):
+```
+layer_factor  = clamp(0.20 / layer_height_mm, 0.6, 1.5)
+infill_factor = 1.0 + (infill_pct / 100) × 0.3
+time_hr       = (volume_cm3 × layer_factor × infill_factor) / (cm3_per_hr × speed_factor)
+price         = $5 + (weight_g × rate_$/g) + (time_hr × $8/hr)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The backend sends all material parameters in the initial response so no second network call is needed when the user switches materials.
+
+---
+
+### `src/components/QuotesWorkspace.js`
+Multi-part quote cart with PDF batch export.
+
+**Capabilities:**
+- Renders all parts added during the session
+- Each card shows: PNG thumbnail, filename, material, infill %, layer height, unit price
+- Remove individual parts or clear all
+- Export to a multi-page PDF using jsPDF + html2canvas
+
+**Persistence:** Cart state survives page reloads via `localStorage` key `c3dpw_quote_cart_v1`.
+
+---
+
+### `src/components/Navbar.js` / `src/components/Footer.js`
+Site-wide navigation and footer. Navbar links to all routes; Footer includes contact info and social links.
+
+---
+
+### `src/components/Hero.js`
+Landing page hero section. Renders a looping background video from `public/assets/`.
+
+---
+
+## Production Server — `server.js`
+
+A minimal Express server that serves the React build and handles SPA routing:
+
+```js
+app.use(express.static(path.join(__dirname, "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+app.listen(process.env.PORT || 3000);
+```
+
+The `Procfile` starts this server on Heroku:
+```
+web: npm start
+```
+
+---
+
+## Heroku Deployment
+
+1. Set `REACT_APP_API_BASE` to your backend Heroku app URL **before building** (set it as a Heroku config var so the slug build picks it up).
+2. Push — Heroku runs `npm run build` then `npm start`.
+3. The frontend and backend are two separate Heroku apps that communicate over HTTPS.
