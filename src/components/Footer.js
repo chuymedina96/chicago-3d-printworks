@@ -6,8 +6,9 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <div className="footer-logo">
-            Chicago <strong>3D Printworks</strong>
+          <div className="footer-logo" aria-label="Chicago 3D Printworks">
+            <img src="/logo-mark.svg" alt="" aria-hidden="true" width="40" height="45" />
+            <span className="fl-text"><span className="fl-top">CHICAGO</span><span className="fl-main">3D Printworks</span></span>
           </div>
           <p>
             Engineering-led 3D printing for prototypes, fixtures and custom parts. Designed,

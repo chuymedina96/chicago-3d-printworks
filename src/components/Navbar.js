@@ -33,9 +33,7 @@ export default function Navbar() {
     <header className={`nav ${scrolled || location.pathname !== "/" ? "nav-solid" : ""}`}>
       <div className="container nav-inner">
         <Link to="/" className="brand" aria-label="Chicago 3D Printworks home">
-          <span className="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3L16 3z" /><path d="M16 16l11-6.7M16 16L5 9.3M16 16v13" /></svg>
-          </span>
+          <img className="brand-mark" src="/logo-mark.svg" alt="" aria-hidden="true" width="30" height="34" />
           <span className="brand-text">
             Chicago <strong>3D Printworks</strong>
           </span>
