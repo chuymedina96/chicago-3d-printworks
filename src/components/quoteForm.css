@@ -52,7 +52,7 @@
 .quote-container button {
   appearance: none;
   background-color: var(--brand);
-  color: #140a05;
+  color: var(--accent-ink);
   border: 1px solid transparent;
   padding: 0.75rem 1.15rem;
   border-radius: 999px;
@@ -65,7 +65,7 @@
   min-width: 0; /* allow shrink on tiny screens */
 }
 .quote-container button:hover { background-color: var(--brand-700); }
-.quote-container button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,106,44,.35); }
+.quote-container button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-ring); }
 .quote-container button:disabled { opacity: .55; cursor: not-allowed; }
 
 /* Secondary / quiet */
@@ -154,7 +154,7 @@ input[type="number"], input[type="text"], select {
   padding: .6rem .75rem;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
-input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
+input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px var(--accent-ring); }
 
 /* ==== Utilities ==== */
 .mt-16 { margin-top: 16px; }
@@ -180,7 +180,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
   width: 160px;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
-.custom-qty-input:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
+.custom-qty-input:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px var(--accent-ring); }
 .custom-qty-summary { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
 .pill { display: inline-flex; align-items: baseline; gap: 6px; padding: .5rem .75rem; border-radius: 999px; background: var(--table-head-bg); color: var(--text); border: 1px solid var(--border); font-weight: 700; }
@@ -201,7 +201,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
 .control select,
 .control input[type="number"] { border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 10px; padding: .6rem .75rem; transition: border-color .15s ease, box-shadow .15s ease; }
 .control select:focus,
-.control input[type="number"]:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
+.control input[type="number"]:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px var(--accent-ring); }
 @media (max-width: 700px) { .controls { grid-template-columns: 1fr; } }
 
 /* Keep card bounded */
@@ -251,7 +251,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
 .small { font-size: .9rem; }
 
 /* A11y focus */
-.acc-trigger:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,106,44,.3); background: var(--table-head-bg); border-radius: 10px; }
+.acc-trigger:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-ring); background: var(--table-head-bg); border-radius: 10px; }
 
 /* ====== PDF export tweaks ====== */
 .pdf-export-root, .pdf-export-root * { animation: none !important; transition: none !important; }

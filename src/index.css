@@ -17,6 +17,10 @@
   --accent-hover: #ff8148;
   --accent-soft: rgba(255, 106, 44, 0.12);
   --accent-line: rgba(255, 106, 44, 0.35);
+  --accent-2: #ffb547;            /* gradient partner */
+  --accent-ink: #140a05;          /* text on accent buttons */
+  --accent-glow: rgba(255, 106, 44, 0.22);
+  --accent-ring: rgba(255, 106, 44, 0.32);
   --cyan: #46d3cb;
   --cyan-soft: rgba(70, 211, 203, 0.12);
 
@@ -30,6 +34,20 @@
   --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 40px -20px rgba(0, 0, 0, 0.6);
   --container: 1160px;
   --nav-h: 68px;
+}
+
+/* ---- Green theme: calm, trustworthy, "established shop" ---- */
+:root[data-theme="green"] {
+  --accent: #2ec27e;
+  --accent-hover: #47d391;
+  --accent-soft: rgba(46, 194, 126, 0.12);
+  --accent-line: rgba(46, 194, 126, 0.38);
+  --accent-2: #9be3b8;
+  --accent-ink: #03140b;
+  --accent-glow: rgba(46, 194, 126, 0.2);
+  --accent-ring: rgba(46, 194, 126, 0.32);
+  --cyan: #e8b44a;                 /* secondary accent becomes warm amber for contrast */
+  --cyan-soft: rgba(232, 180, 74, 0.12);
 }
 
 *,
@@ -52,7 +70,7 @@ body {
 
 img, video { max-width: 100%; display: block; }
 a { color: inherit; }
-::selection { background: var(--accent); color: #111; }
+::selection { background: var(--accent); color: var(--accent-ink); }
 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
@@ -112,7 +130,7 @@ strong { color: var(--text); font-weight: 600; }
 }
 .btn:hover { transform: translateY(-1px); }
 .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.btn-primary { background: var(--accent); color: #140a05; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
 .btn-primary:hover { background: var(--accent-hover); }
 .btn-ghost { background: rgba(255, 255, 255, 0.04); color: var(--text); border-color: var(--line-strong); }
 .btn-ghost:hover { border-color: var(--text-2); background: rgba(255, 255, 255, 0.08); }
@@ -141,7 +159,7 @@ strong { color: var(--text); font-weight: 600; }
   margin-bottom: 20px;
 }
 .icon-tile svg { width: 22px; height: 22px; }
-.icon-tile.cyan { background: var(--cyan-soft); border-color: rgba(70, 211, 203, 0.35); color: var(--cyan); }
+.icon-tile.cyan { background: var(--cyan-soft); border-color: color-mix(in srgb, var(--cyan) 35%, transparent); color: var(--cyan); }
 
 .tag {
   display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px;
@@ -154,7 +172,13 @@ strong { color: var(--text); font-weight: 600; }
 .check-list li { position: relative; padding-left: 28px; color: var(--text-2); }
 .check-list li::before {
   content: ""; position: absolute; left: 0; top: 0.45em; width: 16px; height: 16px; border-radius: 50%;
-  background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='%23ff6a2c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  background: var(--accent-soft);
+}
+.check-list li::after {
+  content: ""; position: absolute; left: 2px; top: calc(0.45em + 2px); width: 12px; height: 12px;
+  background: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
 }
 
 /* Engineering grid backdrop */
@@ -171,7 +195,7 @@ strong { color: var(--text); font-weight: 600; }
   border: 1px solid var(--accent-line); border-radius: 28px;
   padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 64px);
   background:
-    radial-gradient(600px 240px at 50% 0%, rgba(255, 106, 44, 0.22), transparent 70%),
+    radial-gradient(600px 240px at 50% 0%, var(--accent-glow), transparent 70%),
     linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
 }
 .cta-band h2 { max-width: 720px; margin-left: auto; margin-right: auto; }
