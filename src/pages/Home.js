@@ -53,12 +53,12 @@ const steps = [
 ];
 
 const readout = [
-  ["Bounding box", "20.0 × 20.0 × 82.5 mm"],
-  ["Volume", "11.19 cm³"],
-  ["Surface area", "70.33 cm²"],
-  ["Triangles", "64,278"],
-  ["Material", "PLA · 0.2 mm · 20%"],
-  ["Est. material", "13.9 g"],
+  ["Bounding box", "99.8 × 86.3 × 20.0 mm"],
+  ["Volume", "35.23 cm³"],
+  ["Surface area", "245.4 cm²"],
+  ["Triangles", "67,086"],
+  ["Material", "PETG · 0.2 mm · 20%"],
+  ["Est. material", "44.7 g"],
 ];
 
 export default function Home() {
@@ -183,7 +183,7 @@ export default function Home() {
           >
             <div className="readout-head">
               <span className="dot" /><span className="dot" /><span className="dot" />
-              <span className="readout-file mono">screw_flat.stl</span>
+              <span className="readout-file mono">clamp_base.stl</span>
             </div>
             <div className="readout-body">
               {readout.map(([k, v]) => (
@@ -194,7 +194,7 @@ export default function Home() {
               ))}
               <div className="readout-total">
                 <span>Estimated price</span>
-                <strong className="mono">$7.41</strong>
+                <strong className="mono">$13.98</strong>
               </div>
             </div>
             <div className="readout-foot mono">Example output from our live quote API</div>

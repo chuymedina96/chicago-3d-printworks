@@ -473,7 +473,7 @@ export default function QuoteForm({ onSaveToCart }) {
         surface_cm2: w.result.surface_cm2,
         bbox_mm: (w.result.bbox_mm || []).join(" x "),
         triangles: w.result.triangles,
-        machine: w.result.pricing_model?.machine_label,
+        machine: "Production FDM fleet",
       };
       Object.entries(s).forEach(([k, v]) => lines.push(`${k},${String(v ?? "").replace(/,/g, ";")}`));
       lines.push("");
@@ -587,7 +587,7 @@ export default function QuoteForm({ onSaveToCart }) {
           ["Surface (cm²)", w.result.surface_cm2],
           ["BBox (mm)", (w.result.bbox_mm || []).join(" x ")],
           ["Triangles", w.result.triangles],
-          ["Machine", w.result.pricing_model?.machine_label || ""],
+          ["Machine", "Production FDM fleet"],
         ];
 
         rows.forEach(([k, v]) => {

@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import "./Technologies.css";
 import { IconPrinter, IconCode, IconLayers } from "../components/Icons";
 
-const machines = [
-  { name: "FlashForge Adventurer 5M Pro", build: "220 × 220 × 220 mm", notes: "Enclosed, high-speed CoreXY. Our go-to for engineering filaments and consistent repeat parts." },
-  { name: "Anycubic Kobra S1", build: "250 × 250 × 250 mm", notes: "High-speed CoreXY for larger parts and multi-material workflows." },
+const fleet = [
+  { title: "High-speed CoreXY fleet", spec: "Parallel production", body: "Multiple enclosed, high-speed machines run in parallel, so prototypes and batches don't wait in a single queue." },
+  { title: "Engineering-material ready", spec: "Hardened nozzles", body: "Hardened-steel nozzles and enclosed build chambers for abrasive, fiber-filled and temperature-sensitive filaments." },
+  { title: "Build envelope", spec: "Up to 250 mm per part", body: "Larger parts are split into sections with alignment features and joined, so size is rarely the limit." },
 ];
 
 const materials = [
@@ -37,15 +38,15 @@ export default function Technologies() {
         <section className="tech-block">
           <div className="section-head">
             <div className="eyebrow">Fleet</div>
-            <h2>Machines</h2>
+            <h2>Our print fleet</h2>
           </div>
-          <div className="grid grid-2">
-            {machines.map((m) => (
-              <article key={m.name} className="card machine-card">
+          <div className="grid grid-3">
+            {fleet.map((m) => (
+              <article key={m.title} className="card machine-card">
                 <div className="icon-tile"><IconPrinter /></div>
-                <h3>{m.name}</h3>
-                <div className="machine-spec mono">Build volume · {m.build}</div>
-                <p>{m.notes}</p>
+                <h3>{m.title}</h3>
+                <div className="machine-spec mono">{m.spec}</div>
+                <p>{m.body}</p>
               </article>
             ))}
           </div>
