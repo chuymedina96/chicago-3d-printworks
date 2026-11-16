@@ -1,63 +1,40 @@
-/* ==== Design tokens ==== */
-:root {
-  --bg: #f7f9fc;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #6b7280;
-  --border: rgba(15, 23, 42, 0.08);
-  --ring: #00adb5;
-  --brand: #00adb5;
-  --brand-700: #019ba2;
-  --brand-50: #eefbfc;
-  --shadow: 0 10px 30px rgba(0,0,0,0.07);
-
-  /* Tables */
-  --table-head-bg: #f3f6fb;
-  --table-stripe: rgba(15, 23, 42, 0.03);
-  --table-hover: rgba(15, 23, 42, 0.06);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b1220;
-    --panel: #0f172a;
-    --text: #e5e7eb;
-    --muted: #9ca3af;
-    --border: rgba(255, 255, 255, 0.08);
-    --ring: #34e2ea;
-    --brand: #34e2ea;
-    --brand-700: #21c3cb;
-    --brand-50: rgba(52, 226, 234, 0.08);
-    --shadow: 0 10px 30px rgba(0,0,0,0.4);
-
-    --table-head-bg: rgba(255,255,255,0.04);
-    --table-stripe: rgba(255,255,255,0.03);
-    --table-hover: rgba(255,255,255,0.08);
-  }
+/* ==== Design tokens (mapped to the global site theme in index.css) ==== */
+.quote-container, .modal-card, .terms-page {
+  --bg: #0b0e12;
+  --panel: var(--surface);
+  --border: var(--line);
+  --ring: var(--accent);
+  --brand: var(--accent);
+  --brand-700: var(--accent-hover);
+  --brand-50: var(--accent-soft);
+  --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  --table-head-bg: rgba(255, 255, 255, 0.04);
+  --table-stripe: rgba(255, 255, 255, 0.02);
+  --table-hover: rgba(255, 255, 255, 0.06);
 }
 
 /* ==== Layout container ==== */
 .quote-container {
-  margin: 2.5rem auto;
+  margin: 0 auto;
   padding: 1.25rem;
   max-width: 880px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
   box-shadow: var(--shadow);
   color: var(--text);
 }
 @media (min-width: 640px) { .quote-container { padding: 1.75rem 2rem; } }
 
 /* ==== Typography ==== */
-.quote-container h4 { margin: 0 0 0.75rem 0; font-weight: 700; color: var(--text); }
+.quote-container h4 { margin: 0 0 0.75rem 0; font-family: var(--font-display); font-weight: 600; color: var(--text); }
 .hint { margin-top: 0.5rem; color: var(--muted); font-size: 0.9rem; }
 
 /* ==== Dropzone ==== */
 .drop-area {
   position: relative;
-  padding: 2.25rem 1.25rem;
-  border: 2px dashed var(--border);
+  padding: 2.75rem 1.25rem;
+  border: 2px dashed var(--line-strong);
   border-radius: 12px;
   text-align: center;
   color: var(--muted);
@@ -75,11 +52,12 @@
 .quote-container button {
   appearance: none;
   background-color: var(--brand);
-  color: #fff;
+  color: #140a05;
   border: 1px solid transparent;
-  padding: 0.8rem 1.1rem;
-  border-radius: 10px;
-  font-weight: 700;
+  padding: 0.75rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
   cursor: pointer;
   transition: background-color .2s ease;
   position: relative;
@@ -87,12 +65,12 @@
   min-width: 0; /* allow shrink on tiny screens */
 }
 .quote-container button:hover { background-color: var(--brand-700); }
-.quote-container button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,173,181,.3); }
+.quote-container button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,106,44,.35); }
 .quote-container button:disabled { opacity: .55; cursor: not-allowed; }
 
 /* Secondary / quiet */
-.button-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-.button-secondary:hover { background: var(--table-head-bg); border-color: var(--ring); color: var(--text); }
+.quote-container .button-secondary, .button-secondary { background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--line-strong); }
+.quote-container .button-secondary:hover, .button-secondary:hover { background: rgba(255,255,255,0.08); border-color: var(--accent-line); color: var(--text); }
 .button-quiet { box-shadow: none !important; transform: none !important; }
 
 /* ==== Status ==== */
@@ -176,7 +154,7 @@ input[type="number"], input[type="text"], select {
   padding: .6rem .75rem;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
-input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(0,173,181,.25); }
+input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
 
 /* ==== Utilities ==== */
 .mt-16 { margin-top: 16px; }
@@ -202,7 +180,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
   width: 160px;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
-.custom-qty-input:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(0,173,181,.25); }
+.custom-qty-input:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
 .custom-qty-summary { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
 .pill { display: inline-flex; align-items: baseline; gap: 6px; padding: .5rem .75rem; border-radius: 999px; background: var(--table-head-bg); color: var(--text); border: 1px solid var(--border); font-weight: 700; }
@@ -223,7 +201,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
 .control select,
 .control input[type="number"] { border: 1px solid var(--border); background: var(--panel); color: var(--text); border-radius: 10px; padding: .6rem .75rem; transition: border-color .15s ease, box-shadow .15s ease; }
 .control select:focus,
-.control input[type="number"]:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(0,173,181,.25); }
+.control input[type="number"]:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(255,106,44,.3); }
 @media (max-width: 700px) { .controls { grid-template-columns: 1fr; } }
 
 /* Keep card bounded */
@@ -273,7 +251,7 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
 .small { font-size: .9rem; }
 
 /* A11y focus */
-.acc-trigger:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,173,181,.25); background: var(--table-head-bg); border-radius: 10px; }
+.acc-trigger:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,106,44,.3); background: var(--table-head-bg); border-radius: 10px; }
 
 /* ====== PDF export tweaks ====== */
 .pdf-export-root, .pdf-export-root * { animation: none !important; transition: none !important; }
@@ -425,3 +403,17 @@ input:focus, select:focus { outline: none; border-color: var(--ring); box-shadow
   }
 }
 
+
+/* ==== Redesign overrides ==== */
+.quote-container .acc-trigger {
+  background: transparent; color: var(--text); border-radius: 0; font-weight: 600;
+  padding: 0.95rem 1.1rem; box-shadow: none;
+}
+.quote-container .acc-trigger:hover { background: rgba(255, 255, 255, 0.04); }
+.quote-container .acc-trigger .chev { color: var(--accent); }
+.quote-container .accordion { background: rgba(255, 255, 255, 0.02); }
+.quote-container .acc-panel { color: var(--text-2); }
+.quote-container .drop-area { border-radius: 16px; background: rgba(255, 255, 255, 0.02); }
+.quote-container .drop-area:hover { border-color: var(--accent-line); }
+.quote-container .control label { font-size: 0.85rem; }
+.quote-container h4 { font-size: 1rem; }

@@ -4,9 +4,13 @@ import "./Terms.css";
 
 export default function Terms() {
   return (
-    <main className="quote-container terms-page" role="main" aria-label="Terms of Service">
-      <article className="estimate-card" style={{ marginTop: 0 }}>
+    <main className="page" role="main" aria-label="Terms of Service">
+     <div className="container">
+      <header className="page-header">
+        <div className="eyebrow">Legal</div>
         <h1>Terms of Service</h1>
+      </header>
+      <article className="terms-page">
         <p className="muted">Last updated: 2025-08-19</p>
 
         {/* Table of contents */}
@@ -182,14 +186,15 @@ export default function Terms() {
           <h3>13. Contact</h3>
           <p>
             Questions? Email us at{" "}
-            <a href="mailto:hello@chicago3dprintworks.com">chicago3dprintworks@gmail.com</a>.
+            <a href="mailto:chicago3dprintworks@gmail.com">chicago3dprintworks@gmail.com</a>.
           </p>
         </section>
 
         <div className="actions" style={{ marginTop: 18 }}>
-          <a className="button-secondary" href="/">Back to Home</a>
+          <a className="btn btn-ghost" href="/">Back to home</a>
         </div>
       </article>
+     </div>
     </main>
   );
 }

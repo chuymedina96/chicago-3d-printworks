@@ -1,94 +1,114 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import "./About.css";
+import { IconCode, IconPin, IconLayers } from "../components/Icons";
+
+const values = [
+  { icon: IconCode, title: "Software + DevOps thinking", body: "We treat production like infrastructure: measured, versioned and repeatable. Our quoting engine and print recipes are built in-house." },
+  { icon: IconLayers, title: "Engineering first", body: "We care whether the part works, not just whether it printed. Every job gets a design and printability check." },
+  { icon: IconPin, title: "Rooted on the South Side", body: "We're building an accessible production hub on Chicago's South Side, bringing real manufacturing capability to the neighborhood." },
+];
 
 export default function About() {
   return (
-    <main className="about-page" role="main" aria-label="About Chicago 3D Printworks">
-      {/* Intro */}
-      <section className="about-card" aria-labelledby="about-title">
-        <h1 id="about-title">About Chicago 3D Printworks</h1>
-        <p className="about-lede">
-          We’re an engineering-driven shop focused on fast, repeatable pipelines for prototype and
-          small–medium batch production. Our quoting engine, print recipes, and scheduling tools are
-          built in-house to keep quality high and pricing transparent.
-        </p>
-      </section>
+    <main className="page about-page">
+      <div className="container">
+        <header className="page-header">
+          <div className="eyebrow">About us</div>
+          <h1>An engineering shop that happens to own printers</h1>
+          <p className="lede">
+            Chicago 3D Printworks is an engineering-driven 3D printing studio focused on fast, repeatable pipelines
+            for prototypes and small-to-medium batch production.
+          </p>
+        </header>
 
-      {/* Story */}
-      <section className="about-card" aria-labelledby="story-title">
-        <h2 id="story-title">Our Story</h2>
-        <p>
-          We started with a simple idea: apply <strong>software + DevOps thinking</strong> to
-          additive manufacturing. We wrote a Python quoting engine that analyzes mesh geometry
-          to compute volume, surface area, triangle count, and a
-          print-time model. Those signals tie into material profiles and machine throughput to
-          generate instant quotes—then the same parameters are used to orchestrate jobs on the floor.
-        </p>
-        <p>
-          Our first product line was delightfully scrappy—<strong>CatCap</strong>, a customizable
-          cap for cats designed for birthdays, photo shoots, and playful personalization. It taught
-          us variant management, fast iteration, and small-batch QC. Today, we help hardware teams,
-          labs, and creators move from one-off prototypes to <em>repeatable short-run production</em>.
-        </p>
-      </section>
+        <section className="about-story card">
+          <div className="story-col">
+            <div className="eyebrow">Our story</div>
+            <h2>Applying software thinking to manufacturing</h2>
+          </div>
+          <div className="story-col">
+            <p>
+              We started with a simple idea: apply <strong>software and DevOps discipline</strong> to additive
+              manufacturing. We wrote a Python quoting engine that analyzes mesh geometry (volume, surface area,
+              triangle count and a print-time model) and ties it to material profiles and machine throughput to
+              generate instant quotes. The same parameters then drive jobs on the floor.
+            </p>
+            <p>
+              Our first product line was delightfully scrappy: <strong>CatCap</strong>, a customizable cap for cats
+              made for birthdays and photo shoots. It taught us variant management, fast iteration and small-batch
+              QC. Today we help hardware teams, labs, manufacturers and makers move from one-off prototypes to
+              <em> repeatable short-run production</em>.
+            </p>
+          </div>
+        </section>
 
-      {/* Team */}
-      <section className="about-card" aria-labelledby="team-title">
-        <h2 id="team-title">Team</h2>
+        <section className="grid grid-3 about-values">
+          {values.map((v) => (
+            <div className="card" key={v.title}>
+              <div className="icon-tile"><v.icon /></div>
+              <h3>{v.title}</h3>
+              <p>{v.body}</p>
+            </div>
+          ))}
+        </section>
 
-        <div className="team-grid-2">
-          {/* Jesus (Chuy) Medina */}
-          <div className="team-member">
-            <img
-              className="headshot"
-              src="/images/team/chuy.jpeg"
-              alt="Jesus Medina"
-              loading="lazy"
-            />
-            <div>
-              <h3 className="team-name">Jesus Medina</h3>
-              <div className="kv">
-                <span className="pill">Founder</span>
-                <span className="pill">Software &amp; DevOps</span>
+        <section className="team">
+          <div className="section-head">
+            <div className="eyebrow">Team</div>
+            <h2>The people behind the parts</h2>
+          </div>
+
+          <article className="card founder">
+            <div className="founder-photo">
+              <img src="/images/team/chuy.jpeg" alt="Jesus Medina, founder of Chicago 3D Printworks" loading="lazy" />
+            </div>
+            <div className="founder-body">
+              <h3 className="founder-name">Jesus &ldquo;Chuy&rdquo; Medina</h3>
+              <div className="tag-row founder-tags">
+                <span className="tag">Founder</span>
+                <span className="tag">Software &amp; DevOps</span>
+                <span className="tag">CAD &amp; fabrication</span>
               </div>
               <p>
-                Jesus is a software engineer, DevOps practitioner, and maker. Before founding Chicago 3D Printworks, he built large-scale systems for startups, Fortune 500 companies, and U.S. federal agencies—including Kubernetes infrastructure for the Department of Education, where reliability and scale were critical.
+                Jesus is a software engineer, DevOps practitioner and maker. Before founding Chicago 3D Printworks
+                he built systems for startups, enterprise clients and U.S. federal agencies, including Kubernetes
+                infrastructure for the Department of Education, where reliability and scale were critical.
               </p>
               <p>
-                At Chicago 3D Printworks, he coded our quoting engine from scratch—analyzing STL files to accurately predict print time, material usage, and costs with engineering-grade precision. By combining DevOps pipelines with 3D printing, he treats production like infrastructure: orchestrated, repeatable, and fast.
+                He wrote our quoting engine from scratch, analyzing STL files to predict print time, material use
+                and cost, and runs production the way he ran infrastructure: orchestrated, repeatable and fast.
               </p>
-              <p>
-                His vision is to use this approach not only to support labs and engineering teams, but also to build a community-centered production hub on the South Side of Chicago—bringing accessible manufacturing to the neighborhoods that need it most.
-              </p>
-              <ul>
-                <li>Tooling: Python, Node, Docker, CI/CD, observability.</li>
-                <li>Quoting engine: STL parsing, material profiling, print-time/cost prediction.</li>
-                <li>Ops: print farm orchestration, parameter versioning, quality traces.</li>
+              <ul className="check-list founder-list">
+                <li>Tooling: Python, Node, Docker, CI/CD, observability</li>
+                <li>Quoting engine: STL parsing, material profiles, time and cost prediction</li>
+                <li>Operations: print-farm orchestration, parameter versioning, quality traces</li>
               </ul>
-              <div className="link-row">
-                <a href="/quote" className="button-secondary">Try Instant Quote</a>
-                <a href="/terms" className="button-secondary">Terms</a>
-                <a href="/support" className="button-secondary">Contact</a>
+              <div className="btn-row">
+                <Link to="/quote" className="btn btn-primary btn-sm">Try the instant quote</Link>
                 <a
                   href="https://www.linkedin.com/in/jmedina-creative-software-engineer/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="button-secondary linkedin-link"
+                  className="btn btn-ghost btn-sm"
                 >
-                  LinkedIn
+                  LinkedIn ↗
                 </a>
               </div>
             </div>
-          </div>
-        </div>
+          </article>
 
-        <div className="about-card soft">
-          <h3>We’re growing</h3>
-          <p className="about-lede">
-            This page is a work in progress—more teammates, partners, and shop photos coming soon.
-          </p>
-        </div>
-      </section>
+          <p className="growing">We&apos;re growing. More teammates, partners and shop photos coming soon.</p>
+        </section>
+
+        <section className="cta-band">
+          <h2>Let&apos;s build something that works</h2>
+          <p>Send us a file, a sketch or a broken part. We&apos;ll take it from there.</p>
+          <div className="btn-row center">
+            <Link to="/quote" className="btn btn-primary">Get an instant quote <span className="arrow">→</span></Link>
+            <Link to="/support#contact" className="btn btn-ghost">Contact the team</Link>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

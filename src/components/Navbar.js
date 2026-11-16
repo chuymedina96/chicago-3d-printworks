@@ -1,94 +1,90 @@
 // src/components/Navbar.js
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import './Navbar.css';
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import "./Navbar.css";
 
-const Navbar = () => {
+const navItems = [
+  { name: "Services", path: "/support" },
+  { name: "Technologies", path: "/technologies" },
+  { name: "About", path: "/about" },
+];
+
+export default function Navbar() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const isActive = (path) =>
-    location.pathname === path || location.pathname.startsWith(path + '/');
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Instant Quote', path: '/quote' },
-    { name: 'Technologies', path: '/technologies' },
-    { name: 'Engineering Support', path: '/support' },
-    { name: 'Terms', path: '/terms' },
-  ];
+  useEffect(() => setIsOpen(false), [location.pathname]);
 
-  const toggleMenu = () => setIsOpen((o) => !o);
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
 
   return (
-    <>
-      <motion.nav
-        className="navbar"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 80 }}
-      >
-        <div className="navbar-container">
-          <Link to="/" className="logo-text">Chicago 3D Printworks</Link>
+    <header className={`nav ${scrolled || location.pathname !== "/" ? "nav-solid" : ""}`}>
+      <div className="container nav-inner">
+        <Link to="/" className="brand" aria-label="Chicago 3D Printworks home">
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 3l11 6.3v13.4L16 29 5 22.7V9.3L16 3z" /><path d="M16 16l11-6.7M16 16L5 9.3M16 16v13" /></svg>
+          </span>
+          <span className="brand-text">
+            Chicago <strong>3D Printworks</strong>
+          </span>
+        </Link>
 
+        <nav className="nav-links" aria-label="Primary">
+          {navItems.map((item) => (
+            <NavLink key={item.path} to={item.path} className={({ isActive }) => (isActive ? "active" : "")}>
+              {item.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="nav-cta">
+          <Link to="/quote" className="btn btn-primary btn-sm">Instant quote</Link>
           <button
-            className="menu-toggle"
-            onClick={toggleMenu}
-            aria-label="Toggle navigation menu"
+            className={`menu-toggle ${isOpen ? "open" : ""}`}
+            onClick={() => setIsOpen((o) => !o)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             type="button"
           >
-            <div className={`bar ${isOpen ? 'open' : ''}`}></div>
-            <div className={`bar ${isOpen ? 'open' : ''}`}></div>
-            <div className={`bar ${isOpen ? 'open' : ''}`}></div>
+            <span /><span />
           </button>
-
-          <ul className="navbar-links desktop">
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link to={item.path} className={isActive(item.path) ? 'active' : ''}>
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
-      </motion.nav>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
             id="mobile-nav"
-            className="mobile-nav-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="mobile-nav"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
           >
-            <div className="mobile-nav-content">
-              <button className="close-btn" onClick={toggleMenu} aria-label="Close menu" type="button">✕</button>
-              <ul>
-                {navItems.map((item) => (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className={isActive(item.path) ? 'active' : ''}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <nav aria-label="Mobile">
+              <NavLink to="/" end>Home</NavLink>
+              {navItems.map((item) => (
+                <NavLink key={item.path} to={item.path}>{item.name}</NavLink>
+              ))}
+              <NavLink to="/terms">Terms</NavLink>
+              <Link to="/quote" className="btn btn-primary">Get an instant quote</Link>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
-};
-
-export default Navbar;
+}

@@ -1,43 +1,105 @@
-import './Technologies.css';
+import { Link } from "react-router-dom";
+import "./Technologies.css";
+import { IconPrinter, IconCode, IconLayers } from "../components/Icons";
 
-function Technologies() {
+const machines = [
+  { name: "FlashForge Adventurer 5M Pro", build: "220 × 220 × 220 mm", notes: "Enclosed, high-speed CoreXY. Our go-to for engineering filaments and consistent repeat parts." },
+  { name: "Anycubic Kobra S1", build: "250 × 250 × 250 mm", notes: "High-speed CoreXY for larger parts and multi-material workflows." },
+];
+
+const materials = [
+  { name: "PLA", use: "Prototypes, fit checks, visual models", strength: 2, heat: 1, density: "1.24 g/cm³" },
+  { name: "PLA+", use: "Tougher everyday functional parts", strength: 3, heat: 1, density: "1.24 g/cm³" },
+  { name: "PETG", use: "Brackets, outdoor parts, light chemical exposure", strength: 3, heat: 2, density: "1.27 g/cm³" },
+  { name: "Nylon", use: "Wear parts, living hinges, impact resistance", strength: 4, heat: 3, density: "1.15 g/cm³" },
+  { name: "CF Nylon", use: "Stiff, light fixtures and end-use tooling", strength: 5, heat: 4, density: "1.20 g/cm³" },
+];
+
+const Meter = ({ value, label }) => (
+  <span className="meter" aria-label={`${label}: ${value} of 5`}>
+    {[1, 2, 3, 4, 5].map((n) => <i key={n} className={n <= value ? "on" : ""} />)}
+  </span>
+);
+
+export default function Technologies() {
   return (
-    <main className="tech-container" role="main" aria-label="Technologies">
-      <h1>Our 3D Printing Stack</h1>
-      <p>
-        At Chicago 3D Printworks, we’re currently running a fleet of high-speed FDM printers,
-        most of which are upgraded with hardened steel nozzles and tuned for multi-material workflows.
-        We specialize in printing real-world parts with accuracy and speed for prototyping, retail, and local brands.
-      </p>
+    <main className="page tech-page">
+      <div className="container">
+        <header className="page-header">
+          <div className="eyebrow">Machines &amp; materials</div>
+          <h1>Our production stack</h1>
+          <p className="lede">
+            A tuned fleet of high-speed FDM printers with hardened-steel nozzles for abrasive, fiber-filled
+            materials, run with versioned print recipes so repeat orders come out the same.
+          </p>
+        </header>
 
-      <h2>Materials We've Used</h2>
-      <ul>
-        <li>PLA / PLA+ – everyday functional parts & prototypes</li>
-        <li>PETG – stronger, more temperature-resistant prints</li>
-        <li>Nylon – flexible and durable</li>
-        <li>Carbon Fiber Nylon – rigid, lightweight, engineering-grade performance</li>
-      </ul>
+        <section className="tech-block">
+          <div className="section-head">
+            <div className="eyebrow">Fleet</div>
+            <h2>Machines</h2>
+          </div>
+          <div className="grid grid-2">
+            {machines.map((m) => (
+              <article key={m.name} className="card machine-card">
+                <div className="icon-tile"><IconPrinter /></div>
+                <h3>{m.name}</h3>
+                <div className="machine-spec mono">Build volume · {m.build}</div>
+                <p>{m.notes}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <h2>File Support & Geometry Analysis</h2>
-      <p>
-        We currently accept STL and OBJ file formats. Our backend quote system is powered by a custom
-        Python algorithm that parses 3D mesh geometry.
-        It analyzes surface area, bounding box dimensions, and part volume to help generate accurate time and material estimates.
-      </p>
+        <section className="tech-block">
+          <div className="section-head">
+            <div className="eyebrow">Materials</div>
+            <h2>What we print in</h2>
+            <p>Not sure which to pick? The quote tool explains each one, and we&apos;ll recommend a material during review.</p>
+          </div>
+          <div className="mat-table" role="table" aria-label="Materials">
+            <div className="mat-row mat-head" role="row">
+              <span role="columnheader">Material</span>
+              <span role="columnheader">Best for</span>
+              <span role="columnheader">Strength</span>
+              <span role="columnheader">Heat resistance</span>
+              <span role="columnheader">Density</span>
+            </div>
+            {materials.map((m) => (
+              <div className="mat-row" role="row" key={m.name}>
+                <span role="cell" className="mat-name">{m.name}</span>
+                <span role="cell" className="mat-use">{m.use}</span>
+                <span role="cell" data-label="Strength"><Meter value={m.strength} label="Strength" /></span>
+                <span role="cell" data-label="Heat"><Meter value={m.heat} label="Heat resistance" /></span>
+                <span role="cell" className="mono mat-den" data-label="Density">{m.density}</span>
+              </div>
+            ))}
+          </div>
+          <p className="fine-note">Relative ratings are a general guide for FDM parts; real performance depends on geometry, orientation and settings.</p>
+        </section>
 
-      <p>
-        Our STL analyzer is still in active development, and we’re refining it weekly to support more real-world edge cases and material options.
-        All pricing is calculated live through our own Django API stack.
-      </p>
-
-      <h2>Vision & Roadmap</h2>
-      <p>
-        While we're currently focused on rapid FDM production using tested materials, we’re actively exploring
-        support for advanced materials like TPU, ASA, and PEEK. Resin/SLA capabilities and CNC post-processing
-        are also on our roadmap as demand increases.
-      </p>
+        <section className="tech-block grid grid-2">
+          <article className="card">
+            <div className="icon-tile cyan"><IconCode /></div>
+            <h3>Geometry analysis &amp; quoting</h3>
+            <p>
+              We accept STL and OBJ. Our own Python engine parses the mesh for volume, surface area, bounding box
+              and triangle count, then maps it to material density and machine throughput to price the part,
+              served live from our Django API.
+            </p>
+            <Link to="/quote" className="btn btn-ghost btn-sm">Open the quote tool <span className="arrow">→</span></Link>
+          </article>
+          <article className="card">
+            <div className="icon-tile cyan"><IconLayers /></div>
+            <h3>Roadmap</h3>
+            <p>
+              We&apos;re expanding toward TPU, ASA and higher-temperature engineering materials, with resin (SLA)
+              for fine-detail prototypes and 3D scanning for faster reverse engineering as demand grows.
+            </p>
+            <div className="tag-row"><span className="tag">TPU</span><span className="tag">ASA</span><span className="tag">High-temp</span><span className="tag">SLA resin</span><span className="tag">3D scanning</span></div>
+          </article>
+        </section>
+      </div>
     </main>
   );
 }
-
-export default Technologies;
